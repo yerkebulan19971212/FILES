@@ -3,11 +3,12 @@ import docx
 import pdfplumber
 from rest_framework.response import Response
 from rest_framework.generics import CreateAPIView
+from rest_framework.views import APIView
 from numpy import unicode
 from nltk.stem import SnowballStemmer
 import nltk.data
 from autocorrect import Speller
-spell = Speller(lang='ru')
+# spell = Speller(lang='ru')
 
 
 stemmer = SnowballStemmer("russian")
@@ -89,9 +90,11 @@ class LSI(object):
         return self.indexes
 
 
-class sdfk(CreateAPIView):
+class sdfk(APIView):
 
     def post(self, request, *args, **kwargs):
+        spell = Speller(lang='ru')
+
         pdf_list = [{
                 "name": "Name",
                 "count": 17,
